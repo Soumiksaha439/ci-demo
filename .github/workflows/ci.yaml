@@ -29,8 +29,11 @@ jobs:
         run: python -m flake8 app.py
 
   testing:
-    runs-on: ubuntu-latest
+  
+    needs: linting
 
+    runs-on: ubuntu-latest
+    
     steps:
       - name: code checkout
         uses: actions/checkout@v4
@@ -40,5 +43,5 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: run test
-        run: python test_app.py
+      - name: run unit test
+        run: python -m unittest discover
